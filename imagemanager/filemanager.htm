@@ -1,0 +1,115 @@
+<div class="imagemng">
+<div class="col-xs-12">
+	<div class="pull-left">
+		 <a class="btn btn-default back-folder" data-root="" data-folder="" onclick="imageFolder(this);">
+		    <i class="fa fa-level-up"></i> Back
+		  </a>
+		  <a class="btn btn-default" onclick="$('#newFolder2').slideToggle();">
+		    <i class="fa fa-folder-o"></i> New Folder
+		  </a>
+		  <br />
+		  <div class="clearfix"></div>
+		  
+	</div>
+	<div class="pull-right">
+		
+              <div class="form-group">
+              <!--<form class="form-horizontal" id="uploadImage" name="uploadImage">
+                  <div class="col-xs-8">
+                  <input type="hidden" id="mode" name="mode" value="uploadimage"/>
+                    <input type="hidden" id="folders_path" name="folders_path"/>
+                    <input type="file" id="file_img" name="file_img">
+                    <p class="help-block">JPG,PNG & GIF</p>
+                  </div>
+                  <div class="col-xs-4">
+                  	<a class="btn btn-app" onclick="filemanagerUploadimage();">
+				    <i class="fa fa-upload"></i> Upload
+				  </a>
+                  </div>
+              </form>-->
+              <form></form>
+              <form class="form-horizontal" id="uploadImage" name="uploadImage">
+              	<div class="col-xs-8">
+                  <input type="hidden" id="mode_c" name="mode_c" value="uploadimage"/>
+                    <input type="hidden" id="folders_path" name="folders_path"/>
+                    <input type="file" id="file_img" name="file_img">
+                    <p class="help-block">JPG,PNG & GIF</p>
+                  </div>
+                  <div class="col-xs-4">
+                  	<a class="btn btn-default" onclick="filemanagerUploadimage();">
+				    <i class="fa fa-upload"></i> Upload
+				  </a>
+                  </div>
+              </form>
+              </div>
+        
+	</div>
+	<div class="clearfix"></div>  
+</div>
+
+<form class="form-horizontal" id="newFolderFrm" name="newFolderFrm">
+		  	<div class="form-group" id="newFolder2" style="display: none;">
+                  <div class="col-sm-3">
+                    <input type="text" class="form-control" id="folder_name" name="folder_name" placeholder="Folder Name"/>
+                    <input type="hidden" class="form-control" id="folder_path" name="folder_path"/>
+                    <input type="hidden" class="form-control" id="mode_c" name="mode_c" value="createfolder" />
+                  </div>
+                  <div class="col-sm-2">
+                  	<button type="button" class="btn btn-primary" onclick="filemanagerCreateFolder();">Create</button>
+                  </div>
+            </div>
+		  </form>
+<div class="col-xs-12" style="margin-top: 10px;">
+	
+	<div class="box box-danger">
+		<div id="boxImgs">
+	    <?php $folder_temp = ''; ?>
+
+<div class="box-header">
+
+<input type="hidden" name="mode_c" value="deletefolder"/>
+	    <?php if(count($folderList)>0){ ?>
+	    <?php foreach($folderList as $folder){ ?>
+	      <div class="pull-left" style="margin-right: 10px; text-align:center;">
+	      <button onclick="imageFolder(this);" type="button" class="btn  btn-default btn-flat btn-md" data-root="<?=urlencode(base64_encode($folder['path']))?>" data-folder="<?=urlencode(base64_encode($folder['path'].'/'.$folder['folder']))?>">
+	      	<i class="fa fa-folder-open"></i><br /><?=$folder['folder']?>
+	      </button><br/>
+	     
+	      <button type="button" onclick="deletefolder('<?=urlencode(base64_encode($folder['path'].'/'.$folder['folder']))?>');" class="btn  btn-primary btn-block btn-flat btn-xs" style="margin-top: 2px;">
+	      	<i class="fa fa-times"></i>
+	    </button>
+	      </div>
+	    <?php $folder_temp=$folder['path']; } ?>
+	    <?php } ?>
+	    
+	  
+	    
+	    
+	    </div>
+	    <div class="clearfix" ></div>
+	    <div class="col-xs-12" style="border-top: 1px solid #dddddd;margin-bottom: 10px;margin-top: 10px;"></div>
+
+	    <div class="box-body">
+	      <div class="row">
+	      <?php $i=1; foreach($imagesList as $imglist){ ?>
+	      	<div class="col-sm-2" style="text-align: center; margin-bottom: 10px;position: relative;">
+			    <a href="javascript:;" class="thumbnail" style="margin-bottom: 0px;">
+			      <img src="<?=$imglist?>" style="height: 100px; ">
+			    </a>
+			    <button type="button" onclick="deleteImageByName('<?=$imglist?>');" class="btn btn-danger btn-xs btn-flat" style="position: absolute;bottom:0px;right:15px;"><i class="fa fa-trash"></i></button>
+		    </div>
+		    <?php if(($i%6)==0){ ?>
+		    <div class="clearfix"></div>
+		    <?php } ?>
+		  <?php $i++; } ?>
+	      </div>
+	    </div>
+	    </div>
+	    <div class="overlay hidden summerPreload" id="summerPreload">
+	      <i class="fa fa-refresh fa-spin"></i>
+	    </div>
+	   
+	</div>
+</div>
+</div>
+<div class="clearfix"></div>

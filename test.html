@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Summernote</title>
+  
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <script src="https://use.fontawesome.com/2ad218dda6.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  <link href="summernote/summernote.css" rel="stylesheet">
+  <script src="configpath.js?1234"></script>
+  <script src="summernote/summernote.js?1234"></script>
+  <script src="imagemanager/imagemanager.js?1234"></script>
+</head>
+<body>
+  <div id="summernote"><p>Hello Summernote</p></div>
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
+  
+  <iframe height="0" width="0" id="updateFrm" name="updateFrm" style="display: none;"></iframe>
+</body>
+</html>
