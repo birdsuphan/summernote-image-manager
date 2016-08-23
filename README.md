@@ -6,7 +6,7 @@ This is simple code.
 <img border="0" src="http://birdsuphan.com/Summernote.png">
 
 Support
-E-Mail:panuphong.bird@gmail.com
+E-Mail:bird@birdsuphan.com
 
 
 Follow me :
