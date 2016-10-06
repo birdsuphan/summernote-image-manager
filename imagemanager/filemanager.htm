@@ -9,10 +9,10 @@
 		  </a>
 		  <br />
 		  <div class="clearfix"></div>
-		  
+
 	</div>
 	<div class="pull-right">
-		
+
               <div class="form-group">
               <!--<form class="form-horizontal" id="uploadImage" name="uploadImage">
                   <div class="col-xs-8">
@@ -42,9 +42,9 @@
                   </div>
               </form>
               </div>
-        
+
 	</div>
-	<div class="clearfix"></div>  
+	<div class="clearfix"></div>
 </div>
 
 <form class="form-horizontal" id="newFolderFrm" name="newFolderFrm">
@@ -60,7 +60,7 @@
             </div>
 		  </form>
 <div class="col-xs-12" style="margin-top: 10px;">
-	
+
 	<div class="box box-danger">
 		<div id="boxImgs">
 	    <?php $folder_temp = ''; ?>
@@ -74,24 +74,24 @@
 	      <button onclick="imageFolder(this);" type="button" class="btn  btn-default btn-flat btn-md" data-root="<?=urlencode(base64_encode($folder['path']))?>" data-folder="<?=urlencode(base64_encode($folder['path'].'/'.$folder['folder']))?>">
 	      	<i class="fa fa-folder-open"></i><br /><?=$folder['folder']?>
 	      </button><br/>
-	     
+
 	      <button type="button" onclick="deletefolder('<?=urlencode(base64_encode($folder['path'].'/'.$folder['folder']))?>');" class="btn  btn-primary btn-block btn-flat btn-xs" style="margin-top: 2px;">
 	      	<i class="fa fa-times"></i>
 	    </button>
 	      </div>
 	    <?php $folder_temp=$folder['path']; } ?>
 	    <?php } ?>
-	    
-	  
-	    
-	    
+
+
+
+
 	    </div>
 	    <div class="clearfix" ></div>
 	    <div class="col-xs-12" style="border-top: 1px solid #dddddd;margin-bottom: 10px;margin-top: 10px;"></div>
 
 	    <div class="box-body">
 	      <div class="row">
-	      <?php $i=1; foreach($imagesList as $imglist){ ?>
+	      <?php $i=1; foreach($imagesList['data'] as $imglist){ ?>
 	      	<div class="col-sm-2" style="text-align: center; margin-bottom: 10px;position: relative;">
 			    <a href="javascript:;" class="thumbnail" style="margin-bottom: 0px;">
 			      <img src="<?=$imglist?>" style="height: 100px; ">
@@ -103,12 +103,54 @@
 		    <?php } ?>
 		  <?php $i++; } ?>
 	      </div>
+         <div class="col-sm-12">
+            <nav>
+				  <ul class="pagination" style="list-style:none;">
+				  	<li><a href="javascript:;" onclick="imagePage(this);" data-folder="<?=$_GET['path']?>" data-page="1" >First Page</a></li>
+				   <?php
+
+				    $c_page = intval($_GET['page']);
+
+				    if($c_page==0){
+						$c_page = 1;
+					}
+					$start = 1;
+					$end = 10;
+					if($c_page>=6){
+						$start = $c_page-4;
+						$end = $c_page+4;
+					}
+
+					if($end>=$imagesList['num']){
+						$end = $imagesList['num'];
+					}
+
+
+				    ?>
+				    <li <?php if($c_page==1){?>class="disabled"<?php } ?>>
+				      <a href="javascript:;" onclick="imagePage(this);" aria-label="Previous" data-folder="<?=$_GET['path']?>" data-page="<?=$c_page-1?>">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+
+				    <?php for($i=$start;$i<=$end;$i++) {?>
+				    <li <?php if($i==$_GET['page']){ ?>class="active"<?php } ?>><a href="javascript:;" onclick="imagePage(this);"  data-folder="<?=$_GET['path']?>" data-page="<?=$i?>"><?=$i?></a></li>
+				 	<?php } ?>
+				    <li <?php if($c_page==$imagesList['num']){?>class="disabled"<?php } ?>>
+				      <a href="javascript:;" onclick="imagePage(this);" aria-label="Next"  data-folder="<?=$_GET['path']?>" data-page="<?=$c_page+1?>">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="javascript:;" onclick="imagePage(this);"  data-folder="<?=$_GET['path']?>" data-page="<?=$imagesList['num']?>">Last Page<?=$_GET['path']?></a></li>
+				  </ul>
+				</nav>
+         </div>
 	    </div>
 	    </div>
-	    <div class="overlay hidden summerPreload" id="summerPreload">
-	      <i class="fa fa-refresh fa-spin"></i>
+	    <div class="overlay hidden summerPreload text-center" id="summerPreload">
+	      <i class="fa fa-refresh fa-spin fa-2x"></i>
 	    </div>
-	   
+
 	</div>
 </div>
 </div>

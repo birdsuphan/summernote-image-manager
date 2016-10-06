@@ -134,7 +134,7 @@ _utf8_decode : function (utftext) {
 
 function ajaxRequestProcess(hash,callbackcallbackFunction){
 
-	
+
 	$.ajax({
 		   type: "GET",
 		   url:  summernoteUrl+"/"+hash,
@@ -163,9 +163,33 @@ function imageFolder(elems){
 	ajaxRequestProcess('imagemanager/filemanager.php?action=filemanagerlistfolder&path='+pathfolder,listFoldercallbackFunction);
 }
 function listFoldercallbackFunction(resp){
-	$('#boxImgs','.imagemng').html(resp);
-	$('#summerPreload','.imagemng').addClass('hidden');
-	
+   setTimeout(function(){
+      $('#boxImgs','.imagemng').html(resp);
+   	$('#summerPreload','.imagemng').addClass('hidden');
+   },800);
+
+
+}
+
+function imagePage(elems){
+	var pathfolder = $(elems).attr('data-folder');
+   var pathpage = $(elems).attr('data-page');
+
+	$('#summerPreload','.imagemng').removeClass('hidden');
+	$('#folder_path').val('');
+	$('#folder_path').val(pathfolder);
+	$('#folders_path').val('');
+	$('#folders_path').val(pathfolder);
+	//$('.back-folder','.imagemng').attr('data-folder',$(elems).attr('data-root'));
+	//$('.back-folder','.imagemng').attr('data-root',$(elems).attr('data-root'));
+	ajaxRequestProcess('imagemanager/filemanager.php?action=filemanagerlistfolder&path='+pathfolder+"&page="+pathpage,listPagecallbackFunction);
+}
+function listPagecallbackFunction(resp){
+   setTimeout(function(){
+   	$('#boxImgs','.imagemng').html(resp);
+   	$('#summerPreload','.imagemng').addClass('hidden');
+   },800);
+
 }
 
 function filemanagerCreateFolder(){
